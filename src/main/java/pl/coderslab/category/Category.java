@@ -1,6 +1,9 @@
 package pl.coderslab.category;
 
+import pl.coderslab.article.Article;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "categories")
@@ -14,6 +17,17 @@ public class Category {
 
     @Column(nullable = true)
     private String description;
+
+    @ManyToMany(mappedBy = "categories")
+    private List<Article> articles;
+
+    public List<Article> getArticles() {
+        return articles;
+    }
+
+    public void setArticles(List<Article> articles) {
+        this.articles = articles;
+    }
 
     @Override
     public String toString() {
