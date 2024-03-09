@@ -11,8 +11,8 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import pl.coderslab.author.AuthorConverter;
-import pl.coderslab.category.CategoryConverter;
+import pl.coderslab.employee.EmployeeConverter;
+import pl.coderslab.status.StatusConverter;
 
 import javax.persistence.EntityManagerFactory;
 
@@ -40,6 +40,7 @@ public class AppConfig implements WebMvcConfigurer {
         entityManagerFactoryBean.setPersistenceUnitName("CMSPersistenceUnit");
         return entityManagerFactoryBean;
     }
+
     @Bean
     public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
         JpaTransactionManager jpaTransactionManager =
@@ -48,18 +49,19 @@ public class AppConfig implements WebMvcConfigurer {
     }
 
     @Override
-    public void addFormatters(FormatterRegistry registry){
-        registry.addConverter(getAuthorConverter());
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addConverter(getEmployeeConverter());
         registry.addConverter(getCategoryConverter());
     }
 
     @Bean
-    public AuthorConverter getAuthorConverter(){
-        return new AuthorConverter();
+    public EmployeeConverter getEmployeeConverter() {
+        return new EmployeeConverter();
     }
 
     @Bean
-    public CategoryConverter getCategoryConverter(){
-        return new CategoryConverter();
+    public StatusConverter getCategoryConverter() {
+        return new StatusConverter();
     }
+
 }
